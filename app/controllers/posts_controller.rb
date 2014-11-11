@@ -3,7 +3,11 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = if current_user
+      Post.where(user_id: current_user)
+    else
+      Post.all
+    end
   end
 
   # GET /posts/1
@@ -22,7 +26,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-
+    @post.user = current_user
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
