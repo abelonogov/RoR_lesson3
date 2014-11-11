@@ -39,7 +39,7 @@
           <% end %>
         </p>
       <% end %>
-      <p>Created by : <%=post.user.name%></p>
+      <p>Created by : <%= post.user.name if post.user %></p>
     </div>
   </div>
 <% end %>
