@@ -24,22 +24,25 @@
             <% end %>
           <% end %>
         </p>
-        <p>
-          <%= link_to edit_post_path(post) do %>
-            <%= content_tag(:button, :class=>'btn btn-warning') do%>
-              Edit
+        <% if post.user == current_user %>
+          <p>
+            <%= link_to edit_post_path(post) do %>
+              <%= content_tag(:button, :class=>'btn btn-warning') do%>
+                Edit
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
-        <p>
-          <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <%= content_tag(:button, :class=>'btn btn-danger') do%>
-              Destroy
+          </p>
+          <p>
+            <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <%= content_tag(:button, :class=>'btn btn-danger') do%>
+                Destroy
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
+          </p>
+        <% end %>
       <% end %>
       <p>Created by : <%= post.user.name %></p>
+      <p>Created at: <%= post.created_at.strftime('%d/%m/%Y') %></p>
     </div>
   </div>
 <% end %>

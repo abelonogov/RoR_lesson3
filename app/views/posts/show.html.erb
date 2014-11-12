@@ -21,9 +21,10 @@
     <h6><%= @post.tags %></h6>
   </div>
 </div>
-
-<%= link_to edit_post_path(@post) do %>
-  <%= content_tag(:button, :class=>'btn btn-warning') do%>
-    Edit
+<% if @post.user == current_user %>
+  <%= link_to edit_post_path(@post) do %>
+    <%= content_tag(:button, :class=>'btn btn-warning') do%>
+      Edit
+    <% end %>
   <% end %>
 <% end %>
