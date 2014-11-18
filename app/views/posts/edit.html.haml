@@ -1,0 +1,9 @@
+.row
+  .col-md-10
+    %h1 Editing post
+  .col-md-2
+    %h1
+      = link_to root_path do
+        = content_tag(:button, :class=>'btn btn-info') do
+          Back
+= render 'form'
