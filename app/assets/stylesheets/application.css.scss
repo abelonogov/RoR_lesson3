@@ -55,4 +55,13 @@
       margin-top: 18px;
     }
   }
+  #banner {
+    position: fixed;
+    bottom: 0;
+    left: center;
+    width: 800px;
+    text-align: center;
+    background-color: cadetblue;
+    color: #fff;
+  }
 }

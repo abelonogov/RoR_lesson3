@@ -1,0 +1,11 @@
+%h1 Sign In With Existing User
+= form_tag sessions_path, method: :post, class: 'sign_in' do
+  .form-group
+    = label_tag :email
+    %br
+    = text_field_tag :email, nil, class: "form-control"
+  .form-group
+    = label_tag :password
+    %br
+    = password_field_tag :password, nil, class: "form-control"
+  = button_tag "Sign In", class: "btn btn-default"

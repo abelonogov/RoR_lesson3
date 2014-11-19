@@ -1,14 +1,23 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
+  before_action :set_cookie
 
   # GET /posts
   def index
     @posts = Post.all
+    respond_to do |format|
+      format.json { render json: @posts, except: [:updated_at, :user_id], include: { user: { only: :name } } }
+      format.html
+    end
   end
 
   # GET /posts/1
   def show
+    respond_to do |format|
+      format.json { render json: @post, except: [:updated_at, :user_id], include: { user: { only: :name } } }
+      format.html
+    end
   end
 
   # GET /posts/new
@@ -55,5 +64,9 @@ class PostsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def post_params
       params.require(:post).permit(:title, :body, :tags)
+    end
+
+    def set_cookie
+      cookies[:views] = cookies[:views].present? ? cookies[:views].to_i + 1 : 1
     end
 end
