@@ -3,6 +3,11 @@
 
 .row
   .col-md-10
+    .rates
+      Rating:
+      = link_to_if post_owner?(@post), "", votes_up_path(@post), method: :post, class: 'glyphicon glyphicon-chevron-up'
+      = @post.voted_rate
+      = link_to_if post_owner?(@post), "", votes_down_path(@post), method: :post, class: 'glyphicon glyphicon-chevron-down'
     %h1
       = @post.title
   .col-md-2
@@ -11,7 +16,7 @@
         = content_tag(:button, :class=>'btn btn-info') do
           Back
 .row
-  .col-md-10
+  .col-md-12
     %h4
       = @post.body
     %br

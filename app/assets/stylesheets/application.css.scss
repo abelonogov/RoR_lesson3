@@ -54,6 +54,14 @@
       margin-right: 44px;
       margin-top: 18px;
     }
+    #post_title {
+      position: relative;
+      .rates {
+        position: absolute;
+        right: 0;
+        top: 3px;
+      }
+    }
   }
   #banner {
     position: fixed;

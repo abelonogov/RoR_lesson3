@@ -1,0 +1,12 @@
+.user_info
+  - if current_user
+    = current_user.name
+    = current_user.email
+    %span.v-bar
+      &#124
+    = link_to "Exit", sessions_logout_path
+  - else
+    = link_to "Sign In", sign_in_path
+    %span.v-bar
+      &#124
+    = link_to "Register New User", sign_up_path

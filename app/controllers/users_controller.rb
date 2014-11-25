@@ -12,8 +12,4 @@ class UsersController < ApplicationController
       redirect_to :back
     end
   end
-  
-  protected
-  
-  
 end

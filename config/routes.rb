@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   get 'sign_in' => 'sessions#login'
   get 'sessions/logout'
   post 'sessions' => 'sessions#create'
-  
 
   resources :posts
+  post 'posts/:id/votes_up' => 'posts#votes_up', as: 'votes_up'
+  post 'posts/:id/votes_down' => 'posts#votes_down', as: 'votes_down'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

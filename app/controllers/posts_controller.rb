@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, except: [:index, :show]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :votes_up, :votes_down]
+  before_action :authenticate, except: [:index, :show, :votes_up, :votes_down]
   before_action :set_cookie
 
   # GET /posts
@@ -55,6 +55,16 @@ class PostsController < ApplicationController
     redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
 
+  def votes_up
+    @post.voted_rate += 1
+    save_voted_post
+  end
+
+  def votes_down
+    @post.voted_rate -= 1
+    save_voted_post
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -68,5 +78,14 @@ class PostsController < ApplicationController
 
     def set_cookie
       cookies[:views] = cookies[:views].present? ? cookies[:views].to_i + 1 : 1
+    end
+
+    def save_voted_post
+      voted_post = VotedPost.new(user: current_user, post: @post)
+      if voted_post.valid? && @post.valid?
+        voted_post.save
+        @post.save
+      end
+      redirect_to :back,
     end
 end

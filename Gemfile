@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby "2.1.4"
 
 gem 'autoprefixer-rails'
+gem 'annotate'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.3.0'

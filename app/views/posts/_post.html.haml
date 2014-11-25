@@ -1,6 +1,12 @@
-%h3
-  %span
-    = post.title
+#post_title
+  .rates
+    Rating:
+    = link_to_if post_owner?(post), "", votes_up_path(post), method: :post, class: 'glyphicon glyphicon-chevron-up'
+    = post.voted_rate
+    = link_to_if post_owner?(post), "", votes_down_path(post), method: :post, class: 'glyphicon glyphicon-chevron-down'
+  %h3
+    %span
+      = link_to post.title, post
 .row
   .col-md-10
     %h4
@@ -10,20 +16,17 @@
     %h6
       = post.tags
   .col-md-2
-    - if current_user
+    - if post.user == current_user
       %p
-        = link_to post do 
-          = content_tag(:button, :class=>'btn btn-success') do
-            Show
-      - if post.user == current_user
-        %p
-          = link_to edit_post_path(post) do 
-            = content_tag(:button, :class=>'btn btn-warning') do
-              Edit
-        %p
-          = link_to post, method: :delete, data: { confirm: 'Are you sure?' } do
-            = content_tag(:button, :class=>'btn btn-danger') do
-              Destroy
+        = link_to edit_post_path(post) do 
+          = content_tag(:button, :class=>'btn btn-warning') do
+            Edit
+      %p
+        = link_to post, method: :delete, data: { confirm: 'Are you sure?' } do
+          = content_tag(:button, :class=>'btn btn-danger') do
+            Destroy
+    %p
+      = image_tag avatar_url(post.user)
     %p
       Created by :
       = post.user.name
