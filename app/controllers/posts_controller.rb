@@ -86,6 +86,6 @@ class PostsController < ApplicationController
         voted_post.save
         @post.save
       end
-      redirect_to :back,
+      redirect_to :back
     end
 end
