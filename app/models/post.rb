@@ -8,5 +8,6 @@ class Post < ActiveRecord::Base
 
   scope :newest, ->  { order( created_at: :desc ) }
   scope :popular, -> { order( voted_rate: :desc ) }
+  scope :last_updated, -> { order( updated_at: :desc ) }
 
 end

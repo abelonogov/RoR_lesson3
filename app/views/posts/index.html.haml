@@ -5,4 +5,7 @@
         Create
 .popular
   = link_to 'Show Popular', posts_path(popular: 'true')
+  %span.v-bar
+    &#124
+  = link_to 'Last Updated', posts_path(updated: 'true')
 = render partial: "post", collection: @posts

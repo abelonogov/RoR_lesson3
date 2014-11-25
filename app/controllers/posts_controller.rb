@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   def index
     @posts = if params[:popular].present?
       Post.all.popular
+    elsif params[:updated].present?
+      Post.all.last_updated
     else
       Post.all.newest
     end
