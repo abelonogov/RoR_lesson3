@@ -5,7 +5,11 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = if params[:popular].present?
+      Post.all.popular
+    else
+      Post.all.newest
+    end
     respond_to do |format|
       format.json { render json: @posts, except: [:updated_at, :user_id], include: { user: { only: :name } } }
       format.html

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   root 'posts#index'
-  get 'sign_up' => 'users#new'
+  get  'sign_up' => 'users#new'
   post 'users' => 'users#create'
 
-  get 'sign_in' => 'sessions#login'
-  get 'sessions/logout'
+  get  'sign_in' => 'sessions#login'
+  get  'sessions/logout'
   post 'sessions' => 'sessions#create'
 
   resources :posts

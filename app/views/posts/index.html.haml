@@ -3,4 +3,6 @@
     = link_to new_post_path do
       = content_tag(:button, :class=>'btn btn-primary') do
         Create
+.popular
+  = link_to 'Show Popular', posts_path(popular: 'true')
 = render partial: "post", collection: @posts
