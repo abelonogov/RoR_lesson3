@@ -23,7 +23,11 @@
     %br
     %h6
       = @post.tags
-- if @post.user == current_user 
+- if @post.user == current_user
   = link_to edit_post_path(@post) do 
     = content_tag(:button, :class=>'btn btn-warning') do
       Edit
+%hr
+%h4 Comments:
+- p @post.comments
+= render 'comments', locals: {post: @post}

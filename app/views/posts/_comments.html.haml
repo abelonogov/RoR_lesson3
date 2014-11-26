@@ -1,0 +1,11 @@
+- if @post.comments.respond_to?(:each)
+  %ul.comments
+  - @post.comments.each do |one_comment|
+    %li
+      = one_comment.comment
+%br
+%p
+- if current_user
+  = link_to comments_new_path(post_id: @post) do 
+    = content_tag(:button, :class=>'btn btn-primary') do
+      Add Comment

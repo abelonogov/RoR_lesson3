@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   post 'posts/:id/votes_up' => 'posts#votes_up', as: 'votes_up'
   post 'posts/:id/votes_down' => 'posts#votes_down', as: 'votes_down'
 
+  get  'comments/new'
+  post 'comments' => 'comments#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
