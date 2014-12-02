@@ -1,0 +1,3 @@
+<%- @comments = @post.comments %>
+$('.comments').html('<%= j render partial: 'comment', collection: @comments %>');
+$('#new_comment').remove();

@@ -1,23 +1,36 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate, except: [:new, :create]
+  before_action :authenticate, only: [:new, :create, :destroy]
+  before_action :get_posts, only: [:new, :create]
 
   def new
-    @comment, @post_id = Comment.new, params[:post_id]
+    @comment = Comment.new
   end
 
   def create
-    post = Post.find(params[:comment][:post_id])
-    @comment = Comment.new(post_params)
-    @comment.post = post
+    @comment = @post.comments.create(comment_params)
+    @comment.user = current_user
     if @comment.save
-      redirect_to post_path(post), notice: 'Comment successfully added.'
+      respond_to do |format|
+        format.js
+      end
     else
-      redirect_to :back
+      redirect_to :back, notice: 'Comment cant be blank.'
     end
   end
 
-  def post_params
+  def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to :back
+  end
+
+  private
+
+  def comment_params
     params.require(:comment).permit(:comment)
+  end
+
+  def get_posts
+    @post = Post.find(params[:post_id])
   end
 end

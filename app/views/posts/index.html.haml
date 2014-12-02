@@ -1,11 +1,11 @@
 - if current_user
   .create_button
     = link_to new_post_path do
-      = content_tag(:button, :class=>'btn btn-primary') do
+      = content_tag(:button, class: 'btn btn-primary') do
         Create
 .popular
   = link_to 'Show Popular', posts_path(popular: 'true')
   %span.v-bar
     &#124
   = link_to 'Last Updated', posts_path(updated: 'true')
-= render partial: "post", collection: @posts
+= render @posts

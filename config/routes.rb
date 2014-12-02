@@ -8,18 +8,18 @@ Rails.application.routes.draw do
   get  'sessions/logout'
   post 'sessions' => 'sessions#create'
 
-  resources :posts
-  post 'posts/:id/votes_up' => 'posts#votes_up', as: 'votes_up'
-  post 'posts/:id/votes_down' => 'posts#votes_down', as: 'votes_down'
+  resources :posts do
+    resources :comments, only: [:new, :create]
+  end
 
-  get  'comments/new'
-  post 'comments' => 'comments#create'
+  delete 'comments/:id' => 'comments#destroy', as: 'delete_comment'
+  post 'posts/:id/votes' => 'posts#votes', as: 'votes'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

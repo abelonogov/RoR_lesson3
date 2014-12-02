@@ -5,15 +5,16 @@
   .col-md-10
     .rates
       Rating:
-      = link_to_if post_owner?(@post), "", votes_up_path(@post), method: :post, class: 'glyphicon glyphicon-chevron-up'
-      = @post.voted_rate
-      = link_to_if post_owner?(@post), "", votes_down_path(@post), method: :post, class: 'glyphicon glyphicon-chevron-down'
+      = link_to_if post_owner?(@post), "", votes_path(@post, vote: 'positive'), method: :post, class: 'glyphicon glyphicon-chevron-up', remote: true
+      %span#voted_rate
+        = @post.voted_rate
+      = link_to_if post_owner?(@post), "", votes_path(@post, vote: 'negative'), method: :post, class: 'glyphicon glyphicon-chevron-down', remote: true
     %h1
       = @post.title
   .col-md-2
     %h1
       = link_to root_path do
-        = content_tag(:button, :class=>'btn btn-info') do
+        = content_tag(:button, class: 'btn btn-info') do
           Back
 .row
   .col-md-12
@@ -24,9 +25,9 @@
     %h6
       = @post.tags
 - if @post.user == current_user
-  = link_to edit_post_path(@post) do 
-    = content_tag(:button, :class=>'btn btn-warning') do
+  = link_to edit_post_path(@post) do
+    = content_tag(:button, class: 'btn btn-warning') do
       Edit
 %hr
 %h4 Comments:
-= render 'comments', locals: {post: @post}
+= render 'comments'

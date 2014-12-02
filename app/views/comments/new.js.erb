@@ -1,0 +1,7 @@
+var form = $('#new_comment');
+var link = $('#show_new_comment_form');
+if (form.length > 0) {
+  form.remove();
+} else {
+  link.after('<%= j render 'comment_form' %>');
+}

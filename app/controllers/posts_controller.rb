@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :votes_up, :votes_down]
-  before_action :authenticate, except: [:index, :show, :votes_up, :votes_down]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :votes]
+  before_action :authenticate, except: [:index, :show]
   before_action :set_cookie
 
   # GET /posts
@@ -61,13 +61,12 @@ class PostsController < ApplicationController
     redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
 
-  def votes_up
-    @post.voted_rate += 1
-    save_voted_post
-  end
-
-  def votes_down
-    @post.voted_rate -= 1
+  def votes
+    if params[:vote] === 'positive'
+      @post.voted_rate += 1
+    elsif params[:vote] === 'negative'
+      @post.voted_rate -= 1
+    end
     save_voted_post
   end
 
@@ -91,7 +90,11 @@ class PostsController < ApplicationController
       if voted_post.valid? && @post.valid?
         voted_post.save
         @post.save
+        respond_to do |format|
+          format.js
+        end
+      else
+        redirect_to :back
       end
-      redirect_to :back
     end
 end

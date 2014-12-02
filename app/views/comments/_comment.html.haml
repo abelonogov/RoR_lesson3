@@ -1,0 +1,10 @@
+%li
+  .row
+    .col-md-8
+      = comment.comment
+    .col-md-2
+      = comment.created_at.strftime('%d/%m/%Y %H:%m')
+    .col-md-2
+      = comment.user.name
+  - if user_can_delete_comment?(comment)
+    =link_to 'Delete Comment', delete_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
