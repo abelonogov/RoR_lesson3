@@ -20,6 +20,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @comments = Comment.roots
     respond_to do |format|
       format.json { render json: @post, except: [:updated_at, :user_id], include: { user: { only: :name } } }
       format.html

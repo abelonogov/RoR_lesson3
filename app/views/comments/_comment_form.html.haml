@@ -1,4 +1,5 @@
 = form_for [@post, @comment], remote: true do |f|
+  = f.hidden_field :parent_id, value: params[:parent_id]
   .form-group
     = f.label :comment
     = f.text_area :comment, class: 'form-control'

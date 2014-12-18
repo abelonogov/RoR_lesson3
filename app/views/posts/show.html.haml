@@ -30,4 +30,24 @@
       Edit
 %hr
 %h4 Comments:
-= render 'comments'
+- @comments.each do |c|
+  .next_level
+    %blockquote
+      %p
+        = c.comment
+      %small.pull-right.reply
+        = link_to 'Reply', new_post_comment_path(@post, parent_id: c.id), remote: true, class: "add_comment#{c.id}"
+        - if user_can_delete_comment?(c)
+          &#124
+          =link_to 'Delete Comment', delete_comment_path(c), method: :delete, data: { confirm: 'Are you sure?' }
+      %small
+        = c.user.name
+        &#124
+        = c.created_at.strftime('%d.%m.%Y')
+      = render 'comments/comment', comments: c.descendants.arrange
+%br
+%p
+- if current_user
+  = link_to new_post_comment_path(@post, parent_id: @post.id), remote: true, id: 'show_new_comment_form' do
+    = content_tag(:button, class: 'btn btn-primary') do
+      Add Comment

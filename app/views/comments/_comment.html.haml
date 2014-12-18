@@ -1,10 +1,16 @@
-%li
-  .row
-    .col-md-8
-      = comment.comment
-    .col-md-2
-      = comment.created_at.strftime('%d/%m/%Y %H:%m')
-    .col-md-2
-      = comment.user.name
-  - if user_can_delete_comment?(comment)
-    =link_to 'Delete Comment', delete_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
+- if comments.respond_to?(:each)
+  - comments.each do |comment, children|
+    .next_level
+      %blockquote
+        %p
+          = comment.comment
+        %small.pull-right.reply
+          = link_to 'Reply', new_post_comment_path(@post, parrent_id: comment.id), remote: true, class: "add_comment#{comment.id}"
+          - if user_can_delete_comment?(comment)
+            &#124
+            =link_to 'Delete Comment', delete_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
+        %small
+          = comment.user.name
+          &#124
+          = comment.created_at.strftime('%d.%m.%Y')
+        = render 'comment', comments: comment.children if children.present?

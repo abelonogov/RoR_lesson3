@@ -4,9 +4,8 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
 
-  scope :can_be_deleted?, -> { where('created_at >= :one_hour_ago', one_hour_ago: Time.now - 1.hour) }
-
   validates_presence_of :comment
+  has_ancestry
 
   def update_post
     self.post.touch
