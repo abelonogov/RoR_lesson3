@@ -1,7 +1,3 @@
-var form = $('#new_comment');
-var link = $('#show_new_comment_form');
-if (form.length > 0) {
-  form.remove();
-} else {
-  link.after('<%= j render 'comment_form' %>');
-}
+var form = $('#new_comment').remove();
+var row = $('.add_comment<%= params[:parent_id] %>').parent('div').parent('div').parent('div');
+row.find('.reply<%= params[:parent_id] %>').after('<%= j render partial: 'comment_form' %>');

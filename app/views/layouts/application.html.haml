@@ -6,6 +6,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    #calendar
+      = month_calendar table: {class: 'calendar'}, td: {class: 'day'} do |date|
+        = date.day
     #wrapper.center-block
       - if cookies[:views]%10 == 0
         #banner.center-block

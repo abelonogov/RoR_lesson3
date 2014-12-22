@@ -1,2 +1,3 @@
-$('.comments').append('<%= j render partial: 'comment', locals: {comments: @comment} %>');
+var parent = $('.add_comment<%= @comment.parent_id %>').parent('div').parent('div').parent('div');
+parent.append('<%= j render partial: 'comment', locals: { comments: [@comment] } %>');
 $('#new_comment').remove();

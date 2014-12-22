@@ -5,6 +5,11 @@
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
 }
+#calendar {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
 #wrapper {
   width: 800px;
   min-height: 800px;
@@ -62,6 +67,9 @@
         right: 0;
         top: 3px;
       }
+    }
+    .next_level {
+      a { font-size: 12px; }
     }
   }
   #banner {

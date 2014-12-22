@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :get_posts, only: [:new, :create]
 
   def new
-    @comment = Comment.new(:parent_id => params[:parent_id], :post_id => params[:post_id])
+    @comment = Comment.new
   end
 
   def create

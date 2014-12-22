@@ -1,16 +1,18 @@
-- if comments.respond_to?(:each)
-  - comments.each do |comment, children|
-    .next_level
-      %blockquote
-        %p
-          = comment.comment
-        %small.pull-right.reply
-          = link_to 'Reply', new_post_comment_path(@post, parrent_id: comment.id), remote: true, class: "add_comment#{comment.id}"
+- comments.each do |comment|
+  .next_level{ style: "padding-left: #{comment.depth*10}px;" }
+    .row
+      .col-md-10
+        = comment.comment
+      .col-md-2
+        - if current_user
+          = link_to 'Reply', new_post_comment_path(@post, parent_id: comment.id), remote: true, class: "add_comment#{comment.id}"
           - if user_can_delete_comment?(comment)
-            &#124
+            %br
             =link_to 'Delete Comment', delete_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }
-        %small
-          = comment.user.name
-          &#124
-          = comment.created_at.strftime('%d.%m.%Y')
-        = render 'comment', comments: comment.children if children.present?
+    %small
+      = comment.user.name
+      &#124
+      = comment.created_at.strftime('%d.%m.%Y')
+    %div{ class: "reply#{comment.id}" }
+    %hr
+    = render 'comments/comment', comments: comment.children if comment.has_children?
