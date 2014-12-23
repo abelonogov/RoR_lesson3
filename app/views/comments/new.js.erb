@@ -1,3 +1,7 @@
-var form = $('#new_comment').remove();
-var row = $('.add_comment<%= params[:parent_id] %>').parent('div').parent('div').parent('div');
-row.find('.reply<%= params[:parent_id] %>').after('<%= j render partial: 'comment_form' %>');
+$('#new_comment').remove();
+if ('<%= params[:parent_id] %>' == '0') {
+  $('#show_new_comment_form').after('<%= j render partial: 'comment_form' %>');
+} else {
+  var row = $('.add_comment<%= params[:parent_id] %>').parent('div').parent('div').parent('div');
+  row.find('.reply<%= params[:parent_id] %>').after('<%= j render partial: 'comment_form' %>');
+}

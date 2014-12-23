@@ -1,3 +1,9 @@
-var parent = $('.add_comment<%= @comment.parent_id %>').parent('div').parent('div').parent('div');
-parent.append('<%= j render partial: 'comment', locals: { comments: [@comment] } %>');
+var is_root = '<%= @comment.ancestry.nil? %>';
+if (is_root === 'true') {
+  '<%- puts "asdfalkjsldfkjalskdjflkasjdlfkajsdf" %>'
+  $('#show_new_comment_form').before('<%= j render partial: 'comment', locals: { comments: [@comment] } %>');
+} else {
+  var element = $('.add_comment<%= @comment.parent_id %>').parent('div').parent('div').parent('div');
+  element.append('<%= j render partial: 'comment', locals: { comments: [@comment] } %>');
+}
 $('#new_comment').remove();

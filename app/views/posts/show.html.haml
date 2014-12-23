@@ -33,7 +33,6 @@
 - @post.comments.roots.each do |c|
   = render 'comments/comment', comments: [c] if c.present?
 %br
-%p
 - if current_user
   = link_to new_post_comment_path(@post, parent_id: 0), remote: true, id: 'show_new_comment_form' do
     = content_tag(:button, class: 'btn btn-primary') do
