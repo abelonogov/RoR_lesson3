@@ -1,6 +1,5 @@
 var is_root = '<%= @comment.ancestry.nil? %>';
 if (is_root === 'true') {
-  '<%- puts "asdfalkjsldfkjalskdjflkasjdlfkajsdf" %>'
   $('#show_new_comment_form').before('<%= j render partial: 'comment', locals: { comments: [@comment] } %>');
 } else {
   var element = $('.add_comment<%= @comment.parent_id %>').parent('div').parent('div').parent('div');
